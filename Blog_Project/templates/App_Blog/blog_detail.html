@@ -1,0 +1,78 @@
+{% extends 'layouts.html'%}
+{% block title %}
+Detail 
+{% endblock %}
+
+    
+    {% block content %}
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>{{blog.title}}</h1>
+                <h2>Publish date: {{blog.pulish_date}}</h2>
+                <h3>Author: {{blog.author}}</h3>
+                <h3 id="num_like_comment">{{blog.blog_like.count}} Likes | {{blog.blog_comment.count}} Comments</h3>
+                <i id="thumb" class="fa-solid fa-thumbs-down fa-3x"></i>
+            </div>
+            <div class="col-sm-6">
+                <img src="{{blog.blog_image.url}}" alt="{{blog.title}}" class="float-end">
+            </div>
+            {{blog.body}}
+        </div>
+        <hr>
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6">
+                    <div class="mt-5 mb-3 position-relative search-icons"> <input type="text" placeholder="Search comments..." class="form-control"> <i class='position-absolute bx bx-search-alt'></i> </div>
+                    <div class="card p-3 border-0">
+                        {% for comment in comments %}
+                        <div class="d-flex flex-row">
+                            <div class="image"> <img src="{{comment.author.user_profile.profile_pic.url}}" class="rounded-circle"> </div>
+                            <div class="d-flex flex-column w-100 ms-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h6 class="mb-1">{{comment.author}}</h6> <span class="ms-1">{{comment.update_date}}</span>
+                                </div>
+                                <p class="comment-text">{{comment.body}}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="commentarea mt-3"> <textarea class="form-control" name="comment"></textarea> </div>
+                            <div class="button mt-3"> <button class="btn btn-danger w-100" type="submit">Submit</button> </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function(){
+                var data = JSON.parse("{{data_for_js|escapejs}}");
+                var num_like = data.num_like;
+                if (data["liked"] == true) {
+                    $("#thumb").removeClass("fa-thumbs-down");
+                    $("#thumb").addClass("fa-thumbs-up");
+                }
+                else{
+                    $("#thumb").removeClass("fa-thumbs-up");
+                    $("#thumb").addClass("fa-thumbs-down");
+                }
+                $('#thumb').click(function(){     
+                    if($('#thumb').hasClass('fa-thumbs-up')){
+                        $('#thumb').removeClass('fa-thumbs-up');
+                        $('#thumb').addClass('fa-thumbs-down');
+                        num_like--;
+                        $("#num_like_comment").text(num_like + " Likes | " + data.num_comment + " Comments");
+                    }else{
+                        $('#thumb').removeClass('fa-thumbs-down');
+                        $('#thumb').addClass('fa-thumbs-up');
+                        num_like++;
+                        $("#num_like_comment").text(num_like + " Likes | " + data.num_comment + " Comments");
+                    }
+                    console.log(data);
+                    $.get(data["url_like"], function(data){
+                        console.log(data);
+                    });
+                });
+            });
+        </script>
+    {% endblock %}

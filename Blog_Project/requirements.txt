@@ -1,0 +1,6 @@
+Django
+django-heroku
+gunicorn
+Pillow
+django-storages
+boto3

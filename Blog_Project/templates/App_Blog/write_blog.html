@@ -1,0 +1,23 @@
+{% extends 'layouts.html'%}
+{% block title %}
+Write Blog
+{% endblock %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" name="title" required> 
+      </div>
+      <div class="mb-3">
+        <label for="body" class="form-label">Body</label>
+        <textarea class="form-control" id="body" name="body" required rows="5"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Blog Image</label>
+        <input class="form-control" type="file" id="formFile" name="blog_image" required>
+    </div>
+    <input type="submit" class="btn btn-primary"></input>
+</form>
+{% endblock %}

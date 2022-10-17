@@ -1,0 +1,24 @@
+{% extends 'layouts.html'%}
+{% block title %}
+Blogs  
+{% endblock %}
+
+{% block content %}
+    {% for blog in blogs %}
+        <div class="card mb-3">
+            <div class="card-header">
+                <h3>{{blog.title}}</h3>
+            </div>
+            <div class="card-body">
+                <p><b>{{blog.update_date}}</b></p>
+                <p><b>{{blog.blog_like.count}} Likes | {{blog.blog_comment.count}} Comments</b></p>
+                <p>{{blog.body|truncatechars:600}}</p>
+                <img src="{{blog.blog_image.url}}" alt="{{blog.title}}" class="mx-auto d-block">
+            </div>
+            <div class="card-footer">
+                <p>Author: {{blog.author}}</p>
+                <a href="{% url 'App_Blog:blog_detail' blog.slug %}" class="btn btn-primary float-end">Read More</a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

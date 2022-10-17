@@ -1,0 +1,18 @@
+{% extends 'layouts.html'%}
+{% block title %}
+Profile
+{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+    <h2>Profile</h2>
+    <div class="card" style="width:400px">
+      <img class="card-img-top" src="{{user.user_profile.profile_pic.url}}" alt="Card image" style="width:100%">
+      <div class="card-body">
+        <h4 class="card-title">{{user.username}}</h4>
+        <p class="card-text">{{user.email}}</p>
+        <a href="{%url 'App_Blog:change_profile'%}" class="btn btn-primary">Change Info</a>
+        <a href="{%url 'App_Blog:change_password'%}" class="btn btn-primary">Change Password</a>
+      </div>
+    </div>
+{% endblock %}

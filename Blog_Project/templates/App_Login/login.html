@@ -1,0 +1,39 @@
+{% extends 'layouts.html'%}
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+    <h1>Login</h1>
+    {% if message == "Invalid username or password" %}
+    <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>Success!</strong> {{message}}!
+      </div>
+    {% elif message == "User created successfully" %}
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>Success!</strong> {{message}}!
+      </div>
+    {% elif message == "Password changed successfully" %}
+    <div class="alert alert-success alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>Success!</strong> {{message}}!
+      </div>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+        </div>
+        <br>
+        <a href="{% url 'App_Login:forget_password' %}">Forget Password</a>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+{% endblock %}

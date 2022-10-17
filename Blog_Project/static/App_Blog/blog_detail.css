@@ -1,0 +1,88 @@
+
+
+.search-icons input {
+    height: 50px;
+    border: none
+}
+
+.search-icons input:focus {
+    box-shadow: none
+}
+
+.search-icons i {
+    position: absolute;
+    top: 17px;
+    right: 10px;
+    font-size: 19px;
+    z-index: 1000
+}
+
+.image {
+    position: relative;
+    border-radius: 50%;
+    border: 3px solid red;
+    padding: 5px;
+    height: 70px;
+    width: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center
+}
+
+.image img {
+    width: 60px;
+    height: 60px
+}
+
+.comment-text {
+    font-size: 13px
+}
+
+label.radio {
+    cursor: pointer
+}
+
+label.radio input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    pointer-events: none
+}
+
+label.radio span {
+    padding: 5px 19px;
+    border: 2px solid red;
+    display: inline-block;
+    color: red;
+    border-radius: 3px;
+    font-size: 18px;
+    text-transform: uppercase
+}
+
+label.radio input:checked+span {
+    border-color: red;
+    background-color: red;
+    color: #fff
+}
+
+.commentarea textarea {
+    resize: none;
+    background-color: #eee;
+    border: none;
+    border: 2px solid #00000024;
+    transition: all 0.5s
+}
+
+.commentarea textarea:focus {
+    background-color: #eee;
+    box-shadow: none;
+    border: 2px solid red
+}
+
+.button button {
+    height: 55px;
+    text-transform: uppercase;
+    background-color: red;
+    border-color: red
+}

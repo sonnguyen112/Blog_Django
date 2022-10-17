@@ -1,0 +1,30 @@
+{% extends 'layouts.html'%}
+{% block title %}
+Change Profile
+{% endblock %}
+
+{% block content %}
+<h1>Change Info</h1>
+{% if message %}
+<div class="alert alert-danger alert-dismissible">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>Error!</strong> {{message}}!
+  </div>
+{% endif %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" class="form-control" id="username" placeholder="username" name="username" required value="{{user.username}}"> 
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="email" required value="{{user.email}}"></input>
+      </div>
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Image Avatar</label>
+        <input class="form-control" type="file" id="formFile" name="upload">
+    </div>
+    <input type="submit" class="btn btn-primary"></input>
+</form>
+{% endblock %}
